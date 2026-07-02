@@ -9,13 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -44,7 +38,7 @@ public class EtlService {
     private final CsvParser csvParser;
     private final ReferencePersister referencePersister;
     private final ProductBatchWriter productBatchWriter;
-    private final ExecutorService etlExecutor;
+    private final ParallelChunkProcessor parallelChunkProcessor;
     private final JdbcTemplate jdbcTemplate;
     private final String csvPath;
     private final int chunkSize;
@@ -62,7 +56,7 @@ public class EtlService {
     public EtlService(CsvParser csvParser,
                       ReferencePersister referencePersister,
                       ProductBatchWriter productBatchWriter,
-                      ExecutorService etlExecutor,
+                      ParallelChunkProcessor parallelChunkProcessor,
                       JdbcTemplate jdbcTemplate,
                       MeterRegistry meterRegistry,
                       @Value("${etl.csv-path:open-food-facts.csv}") String csvPath,
@@ -72,7 +66,7 @@ public class EtlService {
         this.csvParser = csvParser;
         this.referencePersister = referencePersister;
         this.productBatchWriter = productBatchWriter;
-        this.etlExecutor = etlExecutor;
+        this.parallelChunkProcessor = parallelChunkProcessor;
         this.jdbcTemplate = jdbcTemplate;
         this.csvPath = csvPath;
         this.chunkSize = chunkSize;
@@ -147,58 +141,25 @@ public class EtlService {
     }
 
     /**
-     * Splits the rows into chunks and persists them concurrently over virtual threads,
-     * one chunk per thread. Blocks until every chunk has completed.
+     * Persists the products concurrently over virtual threads (via
+     * {@link ParallelChunkProcessor}), one transaction per chunk.
      *
-     * <p>Two guards keep the parallel phase both fast and stable:</p>
-     * <ul>
-     *     <li>a {@link Semaphore} caps the number of chunks writing at once to
-     *         {@code etl.max-concurrency}, so the virtual threads never checkout more JDBC
-     *         connections than the pool holds;</li>
-     *     <li>referential-integrity checking is turned off for the duration of the load
-     *         (re-enabled in a {@code finally}), which removes the FK parent-row locks that
-     *         otherwise make concurrent many-to-many join-table inserts deadlock on H2.
-     *         Integrity is still guaranteed: every referenced id comes from the pre-built
-     *         cache of already-persisted rows.</li>
-     * </ul>
+     * <p>Referential-integrity checking is turned off for the duration of the load
+     * (re-enabled in a {@code finally}), which removes the FK parent-row locks that
+     * otherwise make concurrent many-to-many join-table inserts deadlock on H2. Integrity
+     * is still guaranteed: every referenced id comes from the pre-built cache of
+     * already-persisted rows.</p>
      *
      * @return the number of chunks that failed
      */
     private int writeProducts(List<ProductRow> rows, ReferenceCaches caches) {
-        List<List<ProductRow>> chunks = partition(rows, chunkSize);
-        List<Future<?>> futures = new ArrayList<>(chunks.size());
-        AtomicInteger failures = new AtomicInteger();
-        Semaphore permits = new Semaphore(Math.max(1, maxConcurrency));
-
         setReferentialIntegrity(false);
         try {
-            for (List<ProductRow> chunk : chunks) {
-                futures.add(etlExecutor.submit(() -> {
-                    permits.acquire();
-                    try {
-                        productBatchWriter.writeChunk(chunk, caches);
-                        return null;
-                    } finally {
-                        permits.release();
-                    }
-                }));
-            }
-
-            for (Future<?> future : futures) {
-                try {
-                    future.get();
-                } catch (ExecutionException e) {
-                    failures.incrementAndGet();
-                    log.error("A product chunk failed to persist", e.getCause());
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    throw new IllegalStateException("ETL interrupted while awaiting chunk completion", e);
-                }
-            }
+            return parallelChunkProcessor.process(rows, chunkSize, maxConcurrency,
+                    chunk -> productBatchWriter.writeChunk(chunk, caches));
         } finally {
             setReferentialIntegrity(true);
         }
-        return failures.get();
     }
 
     /**
@@ -237,17 +198,5 @@ public class EtlService {
         } catch (RuntimeException e) {
             log.warn("Could not set referential integrity to {} (ignored): {}", enabled, e.getMessage());
         }
-    }
-
-    /**
-     * Partitions a list into consecutive sublists of at most {@code size} elements.
-     * Returns lightweight {@link List#subList(int, int)} views (no copying).
-     */
-    private static List<List<ProductRow>> partition(List<ProductRow> source, int size) {
-        List<List<ProductRow>> chunks = new ArrayList<>((source.size() + size - 1) / size);
-        for (int start = 0; start < source.size(); start += size) {
-            chunks.add(source.subList(start, Math.min(start + size, source.size())));
-        }
-        return chunks;
     }
 }

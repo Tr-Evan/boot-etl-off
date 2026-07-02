@@ -8,36 +8,41 @@
 
  :: Spring Boot ::                (v3.3.5)
 
-2026-07-01T11:19:21.552+02:00  INFO 19932 --- [etl-off] [           main] com.etloff.EtlOffApplication             : Starting EtlOffApplication using Java 21.0.11 with PID 19932 (C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\target\classes started by evant in C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off)
-2026-07-01T11:19:21.562+02:00  INFO 19932 --- [etl-off] [           main] com.etloff.EtlOffApplication             : No active profile set, falling back to 1 default profile: "default"
-2026-07-01T11:19:22.974+02:00  INFO 19932 --- [etl-off] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-07-01T11:19:23.071+02:00  INFO 19932 --- [etl-off] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 85 ms. Found 6 JPA repository interfaces.
-2026-07-01T11:19:24.749+02:00  INFO 19932 --- [etl-off] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2026-07-01T11:19:24.784+02:00  INFO 19932 --- [etl-off] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-07-01T11:19:24.785+02:00  INFO 19932 --- [etl-off] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-07-01T11:19:24.937+02:00  INFO 19932 --- [etl-off] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-07-01T11:19:24.938+02:00  INFO 19932 --- [etl-off] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3292 ms
-2026-07-01T11:19:25.280+02:00  INFO 19932 --- [etl-off] [           main] com.zaxxer.hikari.HikariDataSource       : etl-off-pool - Starting...
-2026-07-01T11:19:25.748+02:00  INFO 19932 --- [etl-off] [           main] com.zaxxer.hikari.pool.HikariPool        : etl-off-pool - Added connection conn0: url=jdbc:h2:mem:offdb user=SA
-2026-07-01T11:19:25.752+02:00  INFO 19932 --- [etl-off] [           main] com.zaxxer.hikari.HikariDataSource       : etl-off-pool - Start completed.
-2026-07-01T11:19:25.777+02:00  INFO 19932 --- [etl-off] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:offdb'
-2026-07-01T11:19:26.317+02:00  INFO 19932 --- [etl-off] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-07-01T11:19:26.423+02:00  INFO 19932 --- [etl-off] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-07-01T11:19:26.501+02:00  INFO 19932 --- [etl-off] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-07-01T11:19:27.173+02:00  INFO 19932 --- [etl-off] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-07-01T11:19:29.281+02:00  INFO 19932 --- [etl-off] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-07-01T11:19:29.311+02:00  INFO 19932 --- [etl-off] [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@795e8ef5] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-2026-07-01T11:19:29.329+02:00  INFO 19932 --- [etl-off] [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1e987f59] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-2026-07-01T11:19:29.415+02:00  INFO 19932 --- [etl-off] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-07-01T11:19:30.126+02:00  INFO 19932 --- [etl-off] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-07-01T11:19:32.588+02:00  INFO 19932 --- [etl-off] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 4 endpoints beneath base path '/actuator'
-2026-07-01T11:19:32.765+02:00  INFO 19932 --- [etl-off] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2026-07-01T11:19:32.789+02:00  INFO 19932 --- [etl-off] [           main] com.etloff.EtlOffApplication             : Started EtlOffApplication in 11.868 seconds (process running for 12.456)
-2026-07-01T11:19:32.919+02:00  INFO 19932 --- [etl-off] [           main] com.etloff.etl.EtlService                : === ETL START === (file=open-food-facts.csv, chunkSize=250)
-2026-07-01T11:19:35.056+02:00  INFO 19932 --- [etl-off] [           main] com.etloff.etl.CsvParser                 : Parsed 13432 rows from open-food-facts.csv (0 lines skipped)
-2026-07-01T11:19:47.414+02:00  INFO 19932 --- [etl-off] [           main] com.etloff.etl.ReferencePersister        : Persisted references — categories=249, brands=3611, ingredients=22931, allergens=575, additives=275
-2026-07-01T11:19:50.617+02:00  INFO 19932 --- [etl-off] [           main] com.etloff.etl.EtlService                : Perf — durée=17697 ms, produits=13432, débit=758 produits/s, threads actifs=7, mémoire=625/7968 Mo, CPU=16 cœurs
-2026-07-01T11:19:50.624+02:00  INFO 19932 --- [etl-off] [           main] com.etloff.etl.EtlService                : === ETL DONE === 13432 products in 0m 17s (17697 ms) (0 failed chunks)
-2026-07-01T11:22:56.724+02:00  INFO 19932 --- [etl-off] [omcat-handler-0] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-07-01T11:22:56.725+02:00  INFO 19932 --- [etl-off] [omcat-handler-0] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-07-01T11:22:56.730+02:00  INFO 19932 --- [etl-off] [omcat-handler-0] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2026-07-02T13:54:02.127+02:00  INFO 24792 --- [etl-off] [           main] com.etloff.EtlOffApplication             : Starting EtlOffApplication using Java 21.0.11 with PID 24792 (C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\target\classes started by evant in C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off)
+2026-07-02T13:54:02.133+02:00  INFO 24792 --- [etl-off] [           main] com.etloff.EtlOffApplication             : No active profile set, falling back to 1 default profile: "default"
+2026-07-02T13:54:03.883+02:00  INFO 24792 --- [etl-off] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-02T13:54:04.039+02:00  INFO 24792 --- [etl-off] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 141 ms. Found 6 JPA repository interfaces.
+2026-07-02T13:54:05.997+02:00  INFO 24792 --- [etl-off] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-07-02T13:54:06.042+02:00  INFO 24792 --- [etl-off] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-02T13:54:06.042+02:00  INFO 24792 --- [etl-off] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-07-02T13:54:06.264+02:00  INFO 24792 --- [etl-off] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-02T13:54:06.266+02:00  INFO 24792 --- [etl-off] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4023 ms
+2026-07-02T13:54:06.678+02:00  INFO 24792 --- [etl-off] [           main] com.zaxxer.hikari.HikariDataSource       : etl-off-pool - Starting...
+2026-07-02T13:54:07.264+02:00  INFO 24792 --- [etl-off] [           main] com.zaxxer.hikari.pool.HikariPool        : etl-off-pool - Added connection conn0: url=jdbc:h2:mem:offdb user=SA
+2026-07-02T13:54:07.268+02:00  INFO 24792 --- [etl-off] [           main] com.zaxxer.hikari.HikariDataSource       : etl-off-pool - Start completed.
+2026-07-02T13:54:07.295+02:00  INFO 24792 --- [etl-off] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:offdb'
+2026-07-02T13:54:07.781+02:00  INFO 24792 --- [etl-off] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-02T13:54:07.934+02:00  INFO 24792 --- [etl-off] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-07-02T13:54:08.010+02:00  INFO 24792 --- [etl-off] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-02T13:54:08.687+02:00  INFO 24792 --- [etl-off] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-02T13:54:10.978+02:00  INFO 24792 --- [etl-off] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-02T13:54:11.021+02:00  INFO 24792 --- [etl-off] [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@73a88711] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-07-02T13:54:11.037+02:00  INFO 24792 --- [etl-off] [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@28532753] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-07-02T13:54:11.134+02:00  INFO 24792 --- [etl-off] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-02T13:54:11.891+02:00  INFO 24792 --- [etl-off] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-02T13:54:14.469+02:00  INFO 24792 --- [etl-off] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 4 endpoints beneath base path '/actuator'
+2026-07-02T13:54:14.651+02:00  INFO 24792 --- [etl-off] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-07-02T13:54:14.669+02:00  INFO 24792 --- [etl-off] [           main] com.etloff.EtlOffApplication             : Started EtlOffApplication in 13.307 seconds (process running for 13.983)
+2026-07-02T13:54:14.829+02:00  INFO 24792 --- [etl-off] [           main] com.etloff.etl.EtlService                : === ETL START === (file=open-food-facts.csv, chunkSize=250)
+2026-07-02T13:54:15.178+02:00  INFO 24792 --- [etl-off] [           main] com.etloff.etl.CsvParser                 : Parsed 13432 rows from open-food-facts.csv (0 lines skipped)
+2026-07-02T13:54:16.186+02:00  INFO 24792 --- [etl-off] [           main] com.etloff.etl.ReferencePersister        : Persisted references — categories=249, brands=3611, ingredients=22931, allergens=575, additives=275
+2026-07-02T13:54:19.261+02:00  INFO 24792 --- [etl-off] [           main] com.etloff.etl.EtlService                : Perf — durée=4431 ms, produits=13432, débit=3031 produits/s, threads actifs=22, mémoire=364/7968 Mo, CPU=16 cœurs
+2026-07-02T13:54:19.267+02:00  INFO 24792 --- [etl-off] [           main] com.etloff.etl.EtlService                : === ETL DONE === 13432 products in 0m 04s (4431 ms) (0 failed chunks)
+2026-07-02T13:55:16.986+02:00  INFO 24792 --- [etl-off] [omcat-handler-0] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-02T13:55:16.986+02:00  INFO 24792 --- [etl-off] [omcat-handler-0] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-02T13:55:16.988+02:00  INFO 24792 --- [etl-off] [omcat-handler-0] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-07-02T13:55:17.950+02:00  INFO 24792 --- [etl-off] [omcat-handler-1] com.etloff.etl.EtlService                : === ETL START === (file=open-food-facts.csv, chunkSize=250)
+2026-07-02T13:55:18.195+02:00  INFO 24792 --- [etl-off] [omcat-handler-1] com.etloff.etl.CsvParser                 : Parsed 13432 rows from open-food-facts.csv (0 lines skipped)
+2026-07-02T13:55:18.803+02:00  INFO 24792 --- [etl-off] [omcat-handler-1] com.etloff.etl.ReferencePersister        : Persisted references — categories=249, brands=3611, ingredients=22931, allergens=575, additives=275
+2026-07-02T13:55:20.964+02:00  INFO 24792 --- [etl-off] [omcat-handler-1] com.etloff.etl.EtlService                : Perf — durée=3014 ms, produits=13432, débit=4456 produits/s, threads actifs=0, mémoire=491/7968 Mo, CPU=16 cœurs
+2026-07-02T13:55:20.964+02:00  INFO 24792 --- [etl-off] [omcat-handler-1] com.etloff.etl.EtlService                : === ETL DONE === 13432 products in 0m 03s (3014 ms) (0 failed chunks)

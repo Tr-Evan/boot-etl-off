@@ -8,9 +8,11 @@ C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\sr
 C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\etl\EtlResult.java
 C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\etl\EtlRunner.java
 C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\etl\EtlService.java
+C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\etl\ParallelChunkProcessor.java
 C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\etl\ProductBatchWriter.java
 C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\etl\ProductRow.java
 C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\etl\ReferenceCaches.java
+C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\etl\ReferenceChunkWriter.java
 C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\etl\ReferencePersister.java
 C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\EtlOffApplication.java
 C:\Users\evant\Documents\SupDeVinci\Mastere\M2Dev\OptimisationBackend\etl-off\src\main\java\com\etloff\model\AbstractReferenceEntity.java

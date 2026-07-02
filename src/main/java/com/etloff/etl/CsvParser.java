@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
@@ -14,6 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Reads the pipe-delimited Open Food Facts CSV and turns each line into a fully
@@ -74,29 +75,28 @@ public class CsvParser {
      * @throws UncheckedIOException if the file cannot be read
      */
     public List<ProductRow> parse(Path csvPath) {
-        List<ProductRow> rows = new ArrayList<>(16_384);
-        int skipped = 0;
-
-        try (BufferedReader reader = Files.newBufferedReader(csvPath, StandardCharsets.UTF_8)) {
-            reader.readLine(); // skip header
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.isBlank()) {
-                    continue;
-                }
-                ProductRow row = parseLine(line);
-                if (row == null) {
-                    skipped++;
-                } else {
-                    rows.add(row);
-                }
-            }
+        List<String> lines;
+        try {
+            lines = Files.readAllLines(csvPath, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new UncheckedIOException("Unable to read CSV file: " + csvPath, e);
         }
+        if (lines.isEmpty()) {
+            return List.of();
+        }
 
-        log.info("Parsed {} rows from {} ({} lines skipped)", rows.size(), csvPath, skipped);
+        // Reading is sequential (cheap), but the per-line cleaning is CPU-bound regex work —
+        // so it is parallelized across the common ForkJoinPool. StringCleaner is stateless
+        // and thread-safe, and parseLine keeps no shared state.
+        List<String> dataLines = lines.subList(1, lines.size()); // drop the header
+        List<ProductRow> rows = dataLines.parallelStream()
+                .filter(line -> !line.isBlank())
+                .map(this::parseLine)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        log.info("Parsed {} rows from {} ({} lines skipped)",
+                rows.size(), csvPath, dataLines.size() - rows.size());
         return rows;
     }
 

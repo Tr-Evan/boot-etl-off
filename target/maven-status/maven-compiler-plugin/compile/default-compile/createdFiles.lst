@@ -9,7 +9,6 @@ com\etloff\model\Category.class
 com\etloff\etl\EtlService.class
 com\etloff\config\ExecutorConfig.class
 com\etloff\repository\AdditiveRepository.class
-com\etloff\etl\EtlRunner.class
 com\etloff\model\Product.class
 com\etloff\service\ProductQueryService.class
 com\etloff\controller\EtlController.class
@@ -17,15 +16,11 @@ com\etloff\model\Brand.class
 com\etloff\repository\BrandRepository.class
 com\etloff\controller\ReferenceController.class
 com\etloff\repository\AllergenRepository.class
-com\etloff\etl\ProductBatchWriter.class
-com\etloff\etl\ReferencePersister.class
 com\etloff\model\Allergen.class
 com\etloff\model\Nutriments.class
 com\etloff\service\ReferenceQueryService.class
 com\etloff\util\StringCleaner.class
-com\etloff\etl\CsvParser.class
 com\etloff\controller\ProductController.class
-com\etloff\etl\ProductRow.class
 com\etloff\EtlOffApplication.class
 com\etloff\etl\ReferenceCaches.class
 com\etloff\etl\EtlResult.class
