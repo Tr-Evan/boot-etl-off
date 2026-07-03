@@ -1,33 +1,29 @@
-﻿# etl-off
+# etl-off
 
-Application Spring Boot pour ingérer et explorer des données Open Food Facts via une API REST.
+ETL + API REST autour des données Open Food Facts (Spring Boot, Java 21).
 
-## Objectif
-
-Ce projet charge un fichier CSV de produits, nettoie les données, les stocke en base H2 et expose des endpoints pour analyser les résultats.
-
-## Fonctionnalités
-
-- Ingestion de données depuis un CSV
-- Persistance avec Spring Data JPA et Hibernate
-- Optimisation des écritures via batching et virtual threads
-- API REST pour consulter produits, ingrédients, allergènes et additifs
-
-## Prérequis
-
-- Java 21+
-- Maven 3.9+
-- Fichier `open-food-facts.csv` à la racine du projet
-
-## Démarrage
+## Lancer
 
 ```bash
 mvn spring-boot:run
 ```
 
-L’application démarre sur http://localhost:8080.
-La console H2 est disponible sur http://localhost:8080/h2-console.
+L'ingestion se lance au démarrage. API sur http://localhost:8080.
 
-## Configuration
+## Avancement par rapport au TP
 
-Les réglages principaux se trouvent dans [src/main/resources/application.properties](src/main/resources/application.properties).
+| Objectif | État |
+|---|---|
+| Obj.1 — Conception (diagramme de classes + MLD) | ✅ dossier `conception/` |
+| Obj.2 — Entités JPA + couche service + DAO + Javadoc | ✅ |
+| Obj.3 — Cache + Virtual Threads + battre 3 min 45 s | ✅ **~4 s** |
+| Obj.3 — Analyse perfs (temps, threads, mémoire) | ✅ log `Perf —` + Prometheus |
+| Obj.4 — Les 6 endpoints REST | ✅ |
+| Nettoyage (parenthèses, %, caractères parasites, séparateurs) | ✅ |
+| Bonus — Actuator + Prometheus | ✅ |
+
+## Reste à faire / améliorable
+
+- Pas encore de tests d'intégration (seulement des tests unitaires sur le nettoyage).
+- Versionnage git à mettre en place.
+- Variante « JDBC pur » possible pour aller encore plus vite (non retenue : hors cadre JPA).
